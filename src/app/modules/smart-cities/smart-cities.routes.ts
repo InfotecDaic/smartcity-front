@@ -5,6 +5,7 @@ import { UserAccountRoutes } from './modules/user-account/index';
 import { NotificationRoutes } from './modules/notification/index';
 
 import { HomeSmartCitiesComponent } from './components/home-smart-cities/home-smart-cities.component';
+import { MapContainerComponent } from './modules/mapTrip/map-container.component';
 
 import { LoggedInGuard } from '../../core/services/login/logged-in.guard';
 import { LoggedInAdminGuard } from '../../core/services/login/logged-in-admin.guard';
@@ -23,6 +24,7 @@ export const SmartCitiesRoutes: Routes = [
     canActivate: [ LoggedInGuard ],
     children: [
       { path: '', component: HomeSmartCitiesComponent, canActivate: [ LoggedInGuard ]},
+	  { path: 'mapTrip', component: MapContainerComponent },
       ... UserAccountRoutes,
       ... NotificationRoutes,
       ... UserManagerRoutes,
