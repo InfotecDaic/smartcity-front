@@ -9,7 +9,8 @@ import { SmartCitiesComponent } from './smart-cities.component';
 
 // Se van a borrar
 import { HomeSmartCitiesComponent } from './components/home-smart-cities/home-smart-cities.component';
-
+// Map container
+import { MapContainerComponent } from './modules/mapTrip/map-container.component';
 // Elementos del template
 import { TemplateModule } from '../../template/template.module';
 
@@ -49,7 +50,8 @@ import { PublicTransportModule } from './modules/public-transport/public-transpo
   ],
   declarations: [
     SmartCitiesComponent,
-    HomeSmartCitiesComponent
+    HomeSmartCitiesComponent,
+    MapContainerComponent
   ],
   exports: [
     SmartCitiesComponent
