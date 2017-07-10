@@ -8,10 +8,11 @@ export class Alert {
     description: string;
     refUser: string;
     refDevice: string;
+    dataSource: string;
 
     constructor(id?: string, type?: string, alertType?: string, eventObserved?: string, locationDescription?: string,
-                dateTime?: string, description?: Date, refUser?: string,
-                refDevice?: string) {
+                dateTime?: string, description?: string, refUser?: string, dataSource?: string,
+                refDevice?: string ) {
         this.id = id;
         this.type = type;
         this.alertType = alertType;
@@ -20,6 +21,8 @@ export class Alert {
         this.eventObserved = eventObserved;
         this.refUser = refUser;
         this.refDevice = refDevice;
+        this.dataSource = dataSource;
+        this.description = description;
     }
 // tslint:disable-next-line:eofline
 }
