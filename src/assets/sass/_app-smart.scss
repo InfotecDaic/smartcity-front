@@ -75,7 +75,7 @@ a:hover{
     z-index: 3;
     top: 50px;
     left: 275px;
-    width: 275px;
+    width: 220px;
     margin-left: -275px;
     border: none;
     border-radius: 0;
@@ -166,7 +166,7 @@ a:hover{
     background: #fff;
 }
 .main-container{
-  margin: 50px 0 0 275px;
+  margin: 50px 0 0 205px;
     padding: 10px;
     -ms-overflow-x: hidden;
         overflow-x: hidden;
@@ -207,7 +207,7 @@ a:hover{
 }
 /* RTL ashboard */
 .sidebarPushRight{
-    left: 275px !important;
+    left: 215px !important;
     z-index:10;
 }
 .mainContainerPushLeft{
