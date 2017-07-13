@@ -1,7 +1,7 @@
 <form [formGroup]="Form">
   <div class="row">
     <div class="col-md-12">   
-      <h2>My Events</h2>
+      <h2>My Alerts</h2>
       <hr class="title-hr">
       <p>You can see all the alerts that you have generated from the Green Route App</p>
       <div class="row">
@@ -89,7 +89,7 @@
                         <td data-title="Type alert">{{alert.alertType}}</td>
                         <td data-title="Subtype alert">{{alert.eventObserved}}</td>
                         <td data-title="Date">{{alert.dateTime}}</td>
-                        <td data-title="Description">{{alert.description}}</td>
+                        <td data-title="Description" [innerHTML]='alert.description'>{{alert.description}}</td>
                         <td data-title="Data source">{{alert.dataSource}}</td>
                         <td>
                           <!--<button aria-hidden="true" class="btn btn-danger fa fa-trash" ngbtooltip="Delete" placement="top"></button>-->

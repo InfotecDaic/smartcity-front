@@ -18,7 +18,10 @@ export class MainMenuComponent implements OnInit {
   showSetting = '';
   showMenuManageSite = '';
   showMenuPublicTransport = '';
-  showMenuTransportSchedule ='';
+  showMenuTransportSchedule = '';
+  showMenuAlert = '';
+  showMenuPlanMyTrip = '';
+  showMenuSubscriptionToGroups = '';
 
   identityUser: IdentityUser;
 
@@ -70,6 +73,30 @@ export class MainMenuComponent implements OnInit {
       this.showMenuTransportSchedule = '0';
     } else {
       this.showMenuTransportSchedule = element;
+    }
+  }
+
+  addMenuAlert(element: any) {
+    if (element === this.showMenuAlert) {
+        this.showMenuAlert = '0';
+    } else {
+        this.showMenuAlert = element;
+    }
+  }
+
+  addMenuPlanMyTrip (element: any ){
+    if (element === this.showMenuPlanMyTrip) {
+      this.showMenuPlanMyTrip = '0';
+    } else {
+        this.showMenuPlanMyTrip = element;
+     }
+  }
+
+  addMenuSubscriptionToGroups (element: any ) {
+    if (element === this.showMenuSubscriptionToGroups) {
+      this.showMenuSubscriptionToGroups = '0';
+    } else {
+      this.showMenuSubscriptionToGroups = element;
     }
   }
 
