@@ -694,23 +694,36 @@ footer{
         margin-bottom: 20px;
     }
     h2{
-        margin: 40px;
+        margin: 20px;
+    }
+    h4{
+        margin: 20px;
     }
     p{
         margin: 10px;
+        text-align: justify;
     }
     .routes{
         img{
+            padding-top: 10px;
             max-height: 250px;
         }
     }
     .smartRoutes {
         margin: 40px auto;
+        padding: 10px;
+        border-radius: 10px 10px 10px 10px;
+        position: relative;
+
         h1{
-            margin: 20px auto;
+            margin-top: 5%;
         }
         img{
-            max-height: 125px;
+            margin: 10% 10%;
+            max-height: 120px;
+        }
+        p{
+            text-align: center;
         }
     }
 
