@@ -49,7 +49,7 @@ export class TopMenuComponent implements OnInit {
             // Setting here for javascript asynchrone
             this.nAccident = this.checkNotification(this.notifications, 'Accidents');
             this.nAsthma = this.checkNotification(this.notifications, 'AsthmaAttacks');
-            this.nPollution = this.checkNotification(this.notifications, 'Pollutions');
+            this.nPollution = this.checkNotification(this.notifications, 'Pollution');
             this.nPollen = this.checkNotification(this.notifications, 'Pollen');
             this.nTraffic = this.checkNotification(this.notifications, 'TrafficJam');
             this.nWeather = this.checkNotification(this.notifications, 'WeatherConditions');
