@@ -69,7 +69,7 @@
           </div>
         </div>
         <div class="col-md-6">
-          <div class="form-group">
+          <div *ngIf="hasEngine" class="form-group">
             <label for="modelName">Model name</label>
             <input id="modelName"
                    [formControl]="vehicleForm.controls['modelName']" [(ngModel)]="vehicle.modelName" 
@@ -80,14 +80,14 @@
         </div>
         <div class="clearfix"></div>
         <div class="col-md-6">
-          <div class="form-group">
+          <div *ngIf="hasEngine" class="form-group">
             <label for="vehiclPlateIdentifier">Plate identifier</label>
             <input id="vehiclPlateIdentifier" type="text"
             [formControl]="vehicleForm.controls['vehiclPlateIdentifier']" [(ngModel)]="vehicle.vehiclPlateIdentifier" class="form-control" placeholder="Plate identifier"/>
           </div>
         </div>
         <div class="col-md-6">
-          <div class="form-group">
+          <div *ngIf="hasEngine" class="form-group">
             <label for="fuelConsumption">Fuel consumption lts/km</label>
             <input id="fuelConsumption" type="text" (keypress)="restrictNumeric($event, vehicleForm.controls['fuelConsumption'])"
             [formControl]="vehicleForm.controls['fuelConsumption']" [(ngModel)]="vehicle.fuelConsumption" class="form-control" placeholder="Fuel consumption"/>

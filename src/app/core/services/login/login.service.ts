@@ -47,11 +47,11 @@ export class LoginService {
         this.deleteToken();
         return null;
       }
-    })
-    .catch((error: Response | any) => {
-      this.deleteToken();
-      return null;
     });
+    // .catch((error: Response | any) => {
+    //   this.deleteToken();
+    //   return null;
+    // });
   }
 
   private refreshToken(tokenInfo: TokenInfo) {
@@ -87,12 +87,12 @@ export class LoginService {
         .map((res) => {
           console.log('logout');
           return true;
-        })
-        .catch((error) => {
-          console.error('Error at logout');
-          console.log(error);
-          return null;
         });
+        // .catch((error) => {
+        //   console.error('Error at logout');
+        //   console.log(error);
+        //   return null;
+        // });
     } else {
       return null;
     }

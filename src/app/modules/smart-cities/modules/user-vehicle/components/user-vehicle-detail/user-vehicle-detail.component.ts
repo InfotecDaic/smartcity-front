@@ -37,6 +37,7 @@ export class UserVehicleDetailComponent implements OnInit {
     private isConfirm: boolean;
     private messageModal: string;
     private includeText: boolean;
+    private hasEngine: boolean;
 
     // tslint:disable-next-line:no-inferrable-types
     private valido: boolean = false;
@@ -84,6 +85,7 @@ export class UserVehicleDetailComponent implements OnInit {
         try {
             this.isConfirm = false;
             this.includeText = false;
+            this.hasEngine = true;
             this.messageModal = '';
             this.fuelTypes = this.getFuelTypes();
             this.bindTable();
@@ -95,7 +97,7 @@ export class UserVehicleDetailComponent implements OnInit {
                 this.subTitle ='You can edit a new means of transport, such as a vehicle, bicycle and motocycle.'
                 this.getVehicleData();
             } else {
-                this.title = 'Register a means of transport';
+                this.title = 'Register mean of transport';
                 this.subTitle ='You can register a new means of transport, such as a vehicle, bicycle and motocycle.'
                 this.getVehicleTypes();
             }
@@ -119,6 +121,13 @@ export class UserVehicleDetailComponent implements OnInit {
                 },
                 error => this.messageModal = <any>error
             );
+        // Display only neessary options about the vehicle
+        if(indice == 3 ){
+            this.hasEngine = false;
+        }else{
+            this.hasEngine = true;
+        } 
+
     }
 
     // Metodo que se utiliza para llenar los datos del vehiculo cuando se esta en modo de
