@@ -1,35 +1,33 @@
 import { Component, OnInit } from '@angular/core';
-import { MapService } from './map.service';
+import { MapCreateSpotService } from './map-createspot.service';
 import * as mapboxgl from '../../../../../../node_modules/mapbox-gl/dist/mapbox-gl.js';
 
 @Component({
-  selector: 'map-container',
-  templateUrl: './map-container.component.html',
-  styleUrls: ['./map-container.component.css'],
-  providers: [MapService]
+    selector: 'map-createspot',
+    templateUrl: './map-createspot.component.html',
+    styleUrls: ['./map-createspot.component.css'],
+    providers: [MapCreateSpotService]
 })
-export class MapContainerComponent implements OnInit {
-  //private map = new mapboxgl.Map();
-  constructor(private mapService: MapService) { }
+export class MapCreateSpotComponent implements OnInit {
 
-  ngOnInit() {
-    // var map = new mapboxgl.Map({
-    //   container: 'mapbox-frame',
-    //   style:'mapbox://styles/mapbox/streets-v9',
-    //   center:[-99.14,19.40],
-    //   zoom:5
-    // });
-    // //this.mapService.map = map;
+  constructor(private MapService: MapCreateSpotService){}
 
-    // map.on('mousemove', function(e) {
-    //   //document.getElementById('coordinates').innerHTML= JSON.stringify(e.point) + '<br />' + JSON.stringify(e.lngLat);
-    //   document.getElementById('coordinates').style.display = 'block';
-    //   document.getElementById('coordinates').innerHTML ='Longitud: '+JSON.stringify(e.lngLat.lng) + '<br />Latitude: '+JSON.stringify(e.lngLat.lat); //JSON.stringify(e.lngLat);
-    // });
+  ngOnInit(){
+    var map = new mapboxgl.Map({
+      container: 'mapbox-frame',
+      style:'mapbox://styles/mapbox/streets-v9',
+      center:[-99.14,19.40],
+      zoom:9
+    });
+    //this.mapService.map = map;
 
-    // this.pointCircle(map);
-    // this.createPointsOnClick(map);
-    
+    map.on('mousemove', function(e) {
+      //document.getElementById('coordinates').innerHTML= JSON.stringify(e.point) + '<br />' + JSON.stringify(e.lngLat);
+      document.getElementById('coordinates').style.display = 'block';
+      document.getElementById('coordinates').innerHTML ='Longitud: '+JSON.stringify(e.lngLat.lng) + '<br />Latitude: '+JSON.stringify(e.lngLat.lat); //JSON.stringify(e.lngLat);
+    });
+    this.pointCircle(map);
+    this.createPointsOnClick(map);
   }
 
   pointCircle(map: any){
@@ -43,8 +41,6 @@ export class MapContainerComponent implements OnInit {
         ]
       };
     }
-
-
 
     map.on('load', function () {
       map.addSource('point', {
@@ -66,7 +62,6 @@ export class MapContainerComponent implements OnInit {
       }
       animateMarker(0);
     });
-
   }
 
   createPointsOnClick(map: any){
@@ -107,5 +102,6 @@ export class MapContainerComponent implements OnInit {
     });
 
   }
+
 
 }
