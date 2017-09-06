@@ -121,8 +121,11 @@ export class NotificationAllUserTrayComponent implements OnInit {
     // Metodo que se utiliza para el llenado de la tabla con los datos de todas las alertas
     // registradas.
     bindTable(page: string, size: string) {
+        let date: string;
+        date = this.getDateNow();
         try {
-            this._service.getAllByUser(page, size).subscribe(
+            this._service.getAllByDateAlert(date, page, size).subscribe(
+            // this._service.getAllByUser(page, size).subscribe(
                 (res) => {
                     this.instance = new Paginable().deserialize(res);
                     this.alerts = this.instance.content;
@@ -176,7 +179,9 @@ export class NotificationAllUserTrayComponent implements OnInit {
         try {
             let date: string;
             date = this.getDateNow();
-            this._service.getAllByTypeAlert(type, page, size).subscribe(
+            // Con el metodo getAllByAlertDate, solo se muestran las alertas del dia en curso
+            this._service.getAllByAlertDate(type, date, page, size).subscribe(
+          //  this._service.getAllByTypeAlert(type, page, size).subscribe(
                 (res) => {
                     this.instance = new Paginable().deserialize(res);
                     this.alerts = this.instance.content;
@@ -201,7 +206,10 @@ export class NotificationAllUserTrayComponent implements OnInit {
         try {
             let date: string;
             date = this.getDateNow();
-            this._service.getAllByTypeSubTypeAlert(type, subType, page, size).subscribe(
+            // con el metodo getAllByTypeSubTypeAlertDate, solo se muestran las alertas y subalertas
+            // del dia en curso
+            this._service.getAllByTypeSubTypeAlertDate(type, subType, date, page, size).subscribe(
+         // this._service.getAllByTypeSubTypeAlert(type, subType, page, size).subscribe(
                 (res) => {
                     this.instance = new Paginable().deserialize(res);
                     this.alerts = this.instance.content;
