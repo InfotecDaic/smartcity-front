@@ -1,6 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { MapCreateSpotService } from './map-createspot.service';
 import * as mapboxgl from '../../../../../../node_modules/mapbox-gl/dist/mapbox-gl.js';
+import * as GlobVars from './globals';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+
+
 
 @Component({
     selector: 'map-createspot',
@@ -9,8 +13,28 @@ import * as mapboxgl from '../../../../../../node_modules/mapbox-gl/dist/mapbox-
     providers: [MapCreateSpotService]
 })
 export class MapCreateSpotComponent implements OnInit {
+  ShowInputData: boolean = false;
+  SubmitPoint: boolean = true;
+  latitude: string;
+  longitude: string;
+  BusStops: string;
 
-  constructor(private MapService: MapCreateSpotService){}
+  dataForm: FormGroup;
+
+  constructor(private MapService: MapCreateSpotService, fb: FormBuilder){
+    this.dataForm = fb.group({
+      'stop_id': [null, Validators.required],
+      'stop_code': ['', Validators.nullValidator],
+      'stop_name': [null, Validators.required],
+      'stop_desc': ['Descripcion', Validators.nullValidator],
+      'zone_id': ['ID', Validators.nullValidator],
+      'stop_url': ['URL',Validators.nullValidator],
+      'location_type': ['0',Validators.nullValidator],
+      'parent_station': ['', Validators.nullValidator],
+      'stop_timezone': ['', Validators.nullValidator],
+      'wheelchair_boarding': ['0', Validators.nullValidator]
+    })
+  }
 
   ngOnInit(){
     var map = new mapboxgl.Map({
@@ -27,9 +51,10 @@ export class MapCreateSpotComponent implements OnInit {
       document.getElementById('coordinates').innerHTML ='Longitud: '+JSON.stringify(e.lngLat.lng) + '<br />Latitude: '+JSON.stringify(e.lngLat.lat); //JSON.stringify(e.lngLat);
     });
     this.pointCircle(map);
-    this.createPointsOnClick(map);
+    this.createPointsOnClick(map); 
   }
 
+  
   pointCircle(map: any){
     var radius = 0.1;
     function pointOnCircle(angle) {
@@ -57,7 +82,7 @@ export class MapCreateSpotComponent implements OnInit {
         }
       });
       function animateMarker(timestamp) {
-       map.getSource('point').setData(pointOnCircle(timestamp / 1000));
+        map.getSource('point').setData(pointOnCircle(timestamp / 1000));
         requestAnimationFrame(animateMarker);
       }
       animateMarker(0);
@@ -65,14 +90,15 @@ export class MapCreateSpotComponent implements OnInit {
   }
 
   createPointsOnClick(map: any){
-    var geojson_points = {
-      'type': 'FeatureCollection',
-      'features': []
-    };
+    var self = this;
+    // GlobVars.geojson_points = {
+    //   'type': 'FeatureCollection',
+    //   'features': []
+    // };
     map.on('load',function(){
       map.addSource('points',{
         type: 'geojson',
-        data: geojson_points
+        data: GlobVars.geojson_points
       });
       map.addLayer({
         id: 'points-selected',
@@ -83,6 +109,7 @@ export class MapCreateSpotComponent implements OnInit {
           'circle-color': '#3887be'
         }
       });
+      
       map.on('click',function(e){
         var newPoint = {
           'type': 'Feature',
@@ -94,14 +121,35 @@ export class MapCreateSpotComponent implements OnInit {
             ]
           }
         }
+        let long = ""+ e.lngLat.lng;
+        let lati = ""+e.lngLat.lat;
+        self.openInputPoint(long, lati);
         //geojson_points.features[0].geometry.coordinates = [e.lngLat.lng,e.lngLat.lat];
-        geojson_points.features.push(newPoint);
-        map.getSource('points').setData(geojson_points);
-        //document.getElementById('info').innerHTML = JSON.stringify(geojson_points);
+        GlobVars.geojson_points.features.push(newPoint);
+        map.getSource('points').setData(GlobVars.geojson_points);
+        document.getElementById('info').innerHTML = JSON.stringify(GlobVars.geojson_points);
       });
+      
     });
-
+    
   }
 
+  openInputPoint( x: string, y: string ){
+    this.ShowInputData = true;
+    this.longitude = x;
+    this.latitude = y;
+  }
 
+  savePoint(){
+    this.SubmitPoint = true;
+    this.ShowInputData = false;
+  }
+
+  cancelPoint(){
+    var self = this;
+    this.SubmitPoint = false;
+    this.ShowInputData = false;
+    GlobVars.geojson_points.features.pop();
+  }
+  
 }

@@ -4,3 +4,36 @@
 <hr class="title-hr">
 <div id='mapbox-frame'></div>
 <pre id='coordinates' class='coordinates'></pre>
+
+<modal-popup [(visible)]="ShowInputData" title="Input data point">
+  <!-- <div class='row'>
+    <h3>Creating transtport Spot</h3>
+  </div> -->
+  <form [formGroup]='dataForm' >
+    <div class='row'>
+      <div class='form-group' [ngClass]="{'has-danger':!dataForm.controls['stop_id'].valid && dataForm.controls['stop_id'].touched}">
+        <div class="row" style="padding-left:30px">
+          <div class="col-md-5" style="background-color:lightgrey; padding-left:10px">
+            <label for='StopID'> stop_id *</label>
+          </div>
+          <div class="col-md-7">
+            <input id='StopID' type='text' class='form-control' placeholder="stop_id" [formControl]="dataForm.controls['stop_id']" />
+          </div>
+        </div>
+        <div *ngIf="dataForm.controls['stop_id'].hasError('required') && dataForm.controls['stop_id'].touched" class='alert alert-danger' ii8n>stop_id is required</div>
+      </div>
+    </div>
+  </form>
+  <div class='row'>
+    <div class='col'>
+      <button type="button" class="btn btn-smart btn-block" data-dismiss="modal" (click)="cancelPoint();">Cancel</button>
+    </div>
+    <div class='col'>
+      <button type="button" class="btn btn-smart btn-block" data-dismiss="modal" (click)="savePoint();">Submit</button>
+    </div>
+  </div>
+</modal-popup>
+
+<div id='info'>
+  <h3>{{BusStops}}</h3>
+</div>
