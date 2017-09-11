@@ -17,7 +17,7 @@ export class MapCreateSpotComponent implements OnInit {
   SubmitPoint: boolean = true;
   latitude: string;
   longitude: string;
-  BusStops: string;
+  BusStops: Array<string> =[];
 
   dataForm: FormGroup;
 
@@ -26,14 +26,16 @@ export class MapCreateSpotComponent implements OnInit {
       'stop_id': [null, Validators.required],
       'stop_code': ['', Validators.nullValidator],
       'stop_name': [null, Validators.required],
-      'stop_desc': ['Descripcion', Validators.nullValidator],
+      'stop_desc': ['descripcion ', Validators.nullValidator],
       'zone_id': ['ID', Validators.nullValidator],
       'stop_url': ['URL',Validators.nullValidator],
       'location_type': ['0',Validators.nullValidator],
       'parent_station': ['', Validators.nullValidator],
       'stop_timezone': ['', Validators.nullValidator],
       'wheelchair_boarding': ['0', Validators.nullValidator]
-    })
+    });
+    this.BusStops.push('stop_id, stop_code, stop_name, stop_desc, stop_lat, stop_lon, zone_id,stop_url, location_type, parent_station, stop_timezone, wheelchair_boarding');
+    
   }
 
   ngOnInit(){
@@ -127,7 +129,7 @@ export class MapCreateSpotComponent implements OnInit {
         //geojson_points.features[0].geometry.coordinates = [e.lngLat.lng,e.lngLat.lat];
         GlobVars.geojson_points.features.push(newPoint);
         map.getSource('points').setData(GlobVars.geojson_points);
-        document.getElementById('info').innerHTML = JSON.stringify(GlobVars.geojson_points);
+        //document.getElementById('info').innerHTML = JSON.stringify(GlobVars.geojson_points);
       });
       
     });
@@ -143,6 +145,7 @@ export class MapCreateSpotComponent implements OnInit {
   savePoint(){
     this.SubmitPoint = true;
     this.ShowInputData = false;
+    this.addPointToList();
   }
 
   cancelPoint(){
@@ -150,6 +153,33 @@ export class MapCreateSpotComponent implements OnInit {
     this.SubmitPoint = false;
     this.ShowInputData = false;
     GlobVars.geojson_points.features.pop();
+  }
+
+  addPointToList(){
+    this.BusStops.push( +this.dataForm.controls['stop_id'].value +', '
+                        +this.dataForm.controls['stop_code'].value +', '
+                        +this.dataForm.controls['stop_name'].value +', '
+                        +this.dataForm.controls['stop_desc'].value +', '
+                        +this.latitude +', '
+                        +this.longitude +', '
+                        +this.dataForm.controls['zone_id'].value +', '
+                        +this.dataForm.controls['stop_url'].value +', '
+                        +this.dataForm.controls['location_type'].value +', '
+                        +this.dataForm.controls['parent_station'].value +', '
+                        +this.dataForm.controls['stop_timezone'].value +', '
+                        +this.dataForm.controls['wheelchair_boarding'].value
+                        );//+ this.dataForm['stop_id'];
+
+  }
+
+  downloadFile(){
+    var outfile='';
+    this.BusStops.forEach(function(item){
+      outfile += item + '\n';
+    });
+    var blob = new Blob([outfile], {type: 'text/csv'});
+    var url= window.URL.createObjectURL(blob);
+    window.open(url);
   }
   
 }
