@@ -6,6 +6,7 @@ import { NotificationRoutes } from './modules/notification/index';
 
 import { HomeSmartCitiesComponent } from './components/home-smart-cities/home-smart-cities.component';
 import { MapContainerComponent } from './modules/mapTrip/map-container.component';
+import { StatisticsContainerComponent } from './modules/statistics/statistics-container.component';
 import { MapCreateSpotComponent } from './modules/map-createspots/map-createspot.component';
 
 import { LoggedInGuard } from '../../core/services/login/logged-in.guard';
@@ -28,7 +29,8 @@ export const SmartCitiesRoutes: Routes = [
     canActivate: [ LoggedInGuard ],
     children: [
       { path: '', component: HomeSmartCitiesComponent, canActivate: [ LoggedInGuard ]},
-      { path: 'mapTrip', component: MapContainerComponent },
+	    { path: 'mapTrip', component: MapContainerComponent },
+      { path: 'stats', component: StatisticsContainerComponent},
       { path: 'mapCreateSpots', component: MapCreateSpotComponent, canActivate: [ LoggedInGuard, LoggedInTransportAdminGuard ] },
       ... UserAccountRoutes,
       ... NotificationRoutes,
