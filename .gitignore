@@ -43,3 +43,7 @@ testem.log*
 Thumbs.db
 
 /nbproject
+
+# docker
+Dockerfile
+
